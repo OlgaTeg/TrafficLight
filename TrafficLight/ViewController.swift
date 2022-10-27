@@ -8,6 +8,9 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    let alphaThenOn: CGFloat = 1
+    let alphaThenOff: CGFloat = 0.3
 
     @IBOutlet var redLightView: UIView!
     @IBOutlet var yellowLightView: UIView!
@@ -17,15 +20,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //make ronded views
         redLightView.layer.cornerRadius = redLightView.frame.width / 2.2
         yellowLightView.layer.cornerRadius = redLightView.frame.width / 2.2
         greenLightView.layer.cornerRadius = redLightView.frame.width / 2.2
         
         //make transparantie
-        redLightView.alpha = 0.3
-        yellowLightView.alpha = 0.3
-        greenLightView.alpha = 0.3
+        redLightView.alpha = alphaThenOff
+        yellowLightView.alpha = alphaThenOff
+        greenLightView.alpha = alphaThenOff
         
         switchButton.configuration = setupButton(with: "START")
         
@@ -37,14 +39,14 @@ class ViewController: UIViewController {
         
         //make logic
         if redLightView.alpha == yellowLightView.alpha {
-            redLightView.alpha = 1
-            greenLightView.alpha = 0.3
-        } else if redLightView.alpha > 0.3 && yellowLightView.alpha == greenLightView.alpha {
-            yellowLightView.alpha = 1
-            redLightView.alpha = 0.3
-        } else if yellowLightView.alpha > 0.3 && greenLightView.alpha == redLightView.alpha {
-            greenLightView.alpha = 1
-            yellowLightView.alpha = 0.3
+            redLightView.alpha = alphaThenOn
+            greenLightView.alpha = alphaThenOff
+        } else if redLightView.alpha > alphaThenOff && yellowLightView.alpha == greenLightView.alpha {
+            yellowLightView.alpha = alphaThenOn
+            redLightView.alpha = alphaThenOff
+        } else if yellowLightView.alpha > alphaThenOff && greenLightView.alpha == redLightView.alpha {
+            greenLightView.alpha = alphaThenOn
+            yellowLightView.alpha = alphaThenOff
         }
     }
     
